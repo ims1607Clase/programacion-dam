@@ -1,0 +1,254 @@
+.slide {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.4rem;
+  min-height: 15rem;
+}
+.slide h3 {
+  margin: 0.1rem 0 0.7rem;
+  font-size: 1.45rem;
+}
+.slide p,
+.slide li {
+  font-size: 1.06rem;
+}
+.slide .an {
+  border-left: 4px solid var(--accent);
+  padding: 0.35rem 0.8rem;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  border-radius: 0 8px 8px 0;
+}
+.deck-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.deck-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+}
+.dots {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  padding: 0;
+  cursor: pointer;
+}
+.dot.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.deck:focus-visible {
+  outline-offset: 6px;
+}
+.deck {
+  margin: 1rem 0;
+}
+.big {
+  font: 700 1.5rem var(--mono);
+  word-break: break-all;
+}
+.bits {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.bit {
+  width: 3.1rem;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--mono);
+}
+.bit small {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.bit b {
+  font-size: 1.4rem;
+}
+.bit.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.bit.on small {
+  color: var(--accent-ink);
+}
+.muted {
+  color: var(--muted);
+}
+.phases,
+.tl {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+.phase,
+.tlb {
+  flex: 1 1 130px;
+  text-align: center;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 0.5rem 0.6rem;
+  font: 700 0.95rem var(--body);
+  cursor: pointer;
+}
+.phase small,
+.tlb small {
+  display: block;
+  color: var(--muted);
+  font-weight: 600;
+}
+.phase.on,
+.tlb.on {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+.pipe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.3rem;
+  margin: 0.8rem 0;
+}
+.pbox {
+  flex: 1 1 140px;
+  border: 2px dashed var(--line);
+  border-radius: 10px;
+  padding: 0.5rem 0.7rem;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+.pbox.on {
+  opacity: 1;
+  border-style: solid;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+.pbox b {
+  display: block;
+}
+.pbox span {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.parr {
+  align-self: center;
+  font-weight: 700;
+  color: var(--muted);
+}
+.tree {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.tnode {
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 0.35rem 0.6rem;
+  font: 600 0.95rem var(--mono);
+  color: var(--ink);
+  cursor: pointer;
+}
+.tnode:hover {
+  background: var(--soft);
+}
+.tnode.on {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+}
+.term {
+  background: #000;
+  color: #d6f5d6;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font: 400 0.88rem/1.5 var(--mono);
+  height: 230px;
+  overflow: auto;
+  white-space: pre-wrap;
+  margin-bottom: 0.5rem;
+}
+.term .cmd {
+  color: #fff;
+}
+.term .err {
+  color: #ff9b9b;
+}
+.term .ok {
+  color: #8ef0a0;
+}
+.prompt {
+  font: 700 1rem var(--mono);
+}
+.sortrow {
+  display: grid;
+  grid-template-columns: minmax(8rem, 14rem) 1fr;
+  gap: 0.3rem 0.8rem;
+  align-items: center;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin: 0.4rem 0;
+  background: var(--surface);
+}
+.sortrow .sb {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.sortrow .sf {
+  grid-column: 1/-1;
+  font-size: 0.93rem;
+}
+.sortrow .sf b.ok {
+  color: var(--ok);
+}
+.sortrow .sf b.no {
+  color: var(--bad);
+}
+.btn.okb {
+  border-color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 16%, var(--surface));
+}
+.btn.nob {
+  border-color: var(--bad);
+  background: color-mix(in srgb, var(--bad) 14%, var(--surface));
+}
+.warnbox {
+  border: 2px solid var(--warn);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin: 1.2rem 0;
+  background: color-mix(in srgb, var(--warn) 9%, var(--surface));
+}
+.warnbox h4 {
+  margin: 0.1rem 0 0.4rem;
+}

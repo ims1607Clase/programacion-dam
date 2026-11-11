@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programación 1º DAM · Estudio interactivo</title>
+<style>
+:root{--bg:#f3f5f8;--surface:#fff;--soft:#eef2f6;--ink:#14202b;--muted:#566574;--line:#d7dee6;--accent:#d9480f;--ok:#2f9e44}
+@media(prefers-color-scheme:dark){:root{--bg:#0d141b;--surface:#151f29;--soft:#1b2733;--ink:#e6edf3;--muted:#93a3b3;--line:#263543;--accent:#ff8a4c;--ok:#51cf66}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:2.5rem 16px 3rem}
+.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:2.2rem;line-height:1.15;margin:.2rem 0 .6rem}
+.lead{color:var(--muted);margin:0 0 1.6rem;max-width:60ch}
+h2{font-size:1.15rem;margin:2.2rem 0 .8rem}
+.themes{display:grid;gap:1rem;grid-template-columns:1fr 1fr}
+@media(max-width:700px){.themes{grid-template-columns:1fr}h1{font-size:1.75rem}}
+.tema{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.3rem;display:flex;flex-direction:column;gap:.7rem}
+.tema h3{margin:0;font-size:1.5rem}.tema h3 small{display:block;font-size:.78rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.15rem}
+.tema p{margin:0;color:var(--muted);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}.chips span{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;font-size:.8rem;color:var(--muted)}
+.bar{height:8px;background:var(--soft);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.meta{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:700;padding:.7rem 1rem;border-radius:10px;background:var(--accent);color:#fff;margin-top:auto}
+@media(prefers-color-scheme:dark){.btn{color:#1a1208}}
+.btn:hover{filter:brightness(1.08)}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;counter-reset:s;padding:0;list-style:none;margin:0}
+@media(max-width:700px){.flow{grid-template-columns:1fr 1fr}}
+.flow li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem;font-size:.92rem}
+.flow li::before{content:counter(s);display:inline-grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:.85rem;margin-bottom:.35rem}
+.flow b{display:block}.flow span{color:var(--muted);font-size:.85rem}
+.tips{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:.9rem 1.1rem;font-size:.95rem}
+.tips ul{margin:.3rem 0 0;padding-left:1.2rem;color:var(--muted)}.tips li{margin:.15rem 0}.tips b{color:var(--ink)}
+.foot{margin-top:2rem;font-size:.82rem;color:var(--muted)}
+</style></head><body><main>
+<div class="eyebrow">Programación · 1º DAM</div>
+<h1>Estudia y practica Java, paso a paso</h1>
+<p class="lead">Material interactivo basado en los apuntes de la asignatura y en los ejercicios del profe: primero la teoría, luego a practicar con código de verdad.</p>
+
+<div class="themes">
+ <section class="tema" data-key="t1" data-total="70">
+  <h3><small>Tema 1</small>Introducción a la programación con Java</h3>
+  <p>Qué es programar, el entorno, tipos de datos, operadores, conversiones, Math y consola.</p>
+  <div class="chips"><span>📖 Presentaciones</span><span>🧪 Simuladores</span><span>⌨️ Ejercicios</span><span>📋 Relación del profe (NetBeans)</span></div>
+  <div><div class="bar"><i></i></div><div class="meta"><span class="txt">0 de 70 ejercicios y lecciones</span><span class="pct">0%</span></div></div>
+  <a class="btn" href="tema1.html">Entrar al Tema 1</a>
+ </section>
+ <section class="tema" data-key="t2" data-total="107">
+  <h3><small>Tema 2</small>Estructuras de control y calidad del software</h3>
+  <p>Selección, bucles, saltos, excepciones, estilo, pruebas y depuración.</p>
+  <div class="chips"><span>📖 Presentaciones</span><span>🧪 Simuladores</span><span>⌨️ Ejercicios</span><span>📋 Relación del profe (NetBeans)</span><span>🏁 Reto final</span></div>
+  <div><div class="bar"><i></i></div><div class="meta"><span class="txt">0 de 107 ejercicios y lecciones</span><span class="pct">0%</span></div></div>
+  <a class="btn" href="tema2.html">Entrar al Tema 2</a>
+ </section>
+</div>
+
+<h2>Cómo estudiar con esto</h2>
+<ol class="flow">
+ <li><b>Estudia</b><span>Pasa la presentación y juega con los simuladores.</span></li>
+ <li><b>Comprueba</b><span>Haz el test y las predicciones de salida.</span></li>
+ <li><b>Practica</b><span>Escribe el código tú. Las pistas llegan poco a poco.</span></li>
+ <li><b>Compara</b><span>En los del profe, mira la corrección y qué cambia.</span></li>
+</ol>
+
+<h2>Para que te sirva de verdad</h2>
+<div class="tips"><b>Consejos rápidos</b><ul>
+ <li>Intenta cada ejercicio sin pistas antes de mirar nada.</li>
+ <li>Si fallas, rehazlo unos días después sin la web delante.</li>
+ <li>Practica también a mano o en tu IDE: el examen no tendrá autocompletado.</li>
+ <li>Tu progreso se guarda en este navegador; puedes ir y volver entre temas.</li>
+</ul></div>
+
+<p class="foot">Material de estudio no oficial, elaborado por un alumno a partir de los apuntes de la asignatura (apuntesdamdaw.vercel.app). El código se ejecuta en tu navegador con un intérprete propio de un subconjunto de Java, así que puede diferir en detalles de un Java real.</p>
+</main>
+<script>
+document.querySelectorAll('.tema').forEach(function(t){
+  var n=0,tot=+t.dataset.total;
+  try{var sm=JSON.parse(localStorage.getItem('dam-sum-'+t.dataset.key)||'null');if(sm){n=sm.d;tot=sm.t;}}catch(e){}
+  n=Math.min(n,tot);var p=Math.round(100*n/tot);
+  t.querySelector('.bar i').style.width=p+'%';t.querySelector('.txt').textContent=n+' de '+tot+' ejercicios y lecciones';t.querySelector('.pct').textContent=p+'%';
+  if(n>0)t.querySelector('.btn').textContent='Continuar el '+t.querySelector('small').textContent;
+});
+</script></body></html>

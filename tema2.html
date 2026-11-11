@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tema 2 interactivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=JetBrains+Mono:wght@400;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/laboratorio.css">
+<link rel="stylesheet" href="css/reproductor.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><div class="brand" style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap"><a href="index.html" title="Volver a elegir tema" style="text-decoration:none;color:inherit"><b>🏠 Temas</b></a><a href="tema1.html" style="padding:.25rem .6rem;border-radius:.5rem;text-decoration:none;font-weight:700;font-size:.85rem;border:1px solid var(--line,#2a3644);color:inherit">Tema 1</a><a href="tema2.html" style="padding:.25rem .6rem;border-radius:.5rem;text-decoration:none;font-weight:700;font-size:.85rem;background:var(--accent,#ff7b54);color:#111">Tema 2</a></div><div class="crumb" id="pl-crumb"></div><div class="pbar"><div class="bar"><i id="pl-bar"></i></div><span id="pl-pct">0%</span></div></div></header>
+<main id="stage">
+
+<!-- INICIO -->
+
+<!-- ================= p-inicio ================= -->
+<section class="pane" id="p-inicio">
+  <h2>Vamos a aprobar este tema, paso a paso</h2>
+  <p class="lead">Todo lo de aquí sale de los apuntes de tu profe (Unidad 02, apartados 1 a 10) y de sus diapositivas de funciones (métodos). Cada apartado tiene lo mismo: la teoría, una explicación en cristiano, algo que puedes tocar y, abajo, los ejercicios: predice la salida, corrige el código y haz un código.</p>
+  <div class="callout"><p><b>Cómo estudiar con esto.</b> Lee la explicación, juega con el simulador hasta que te sorprenda lo que pasa, haz los ejercicios <em>antes</em> de pulsar "Ver solución". Equivocarte aquí es gratis; en el examen no.</p></div>
+  <div class="callout"><p><b>Orden recomendado.</b> Ve del 2.1 al 2.11 sin saltarte ninguno, porque cada uno usa lo anterior. Después haz el examen de práctica de todo el tema, y repite solo las secciones donde falles.</p></div>
+
+  <h3>Tu progreso</h3>
+  <div class="grid" id="home-cards"></div>
+
+  <h3>Mapa del tema 2</h3>
+  <ul class="map">
+    <li><b>2.1</b>La programación estructurada</li>
+    <li><b>2.2</b>Estructura secuencial</li>
+    <li><b>2.3</b>Estructura selectiva (if, else if, switch)</li>
+    <li><b>2.4</b>Estructura repetitiva (bucles)</li>
+    <li><b>2.5</b>Instrucciones de salto</li>
+    <li><b>2.6</b>Reglas de estilo</li>
+    <li><b>2.7</b>Excepciones</li>
+    <li><b>2.8</b>Pruebas</li>
+    <li><b>2.9</b>Depuración de programas</li>
+    <li><b>2.10</b>Ejemplo integrador</li>
+    <li><b>2.11</b>Funciones (métodos)</li>
+  </ul>
+  <div class="nextrow"><span></span><button class="btn primary" data-go="estructurada">Empezar por 2.1</button></div>
+</section>
+
+<!-- 2.1 -->
+
+<!-- ================= p-estructurada ================= -->
+<section class="pane" id="p-estructurada">
+  <span class="tag">Apartado 2.1</span>
+  <h2>La programación estructurada</h2>
+  <p class="lead">Es la idea de fondo de todo el tema: con muy pocas herramientas se puede hacer cualquier programa, y además queda más fácil de escribir, probar y mantener.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Piensa en piezas de Lego. Con solo tres tipos de pieza (hacer cosas en orden, decidir entre caminos y repetir) puedes construir cualquier programa. El teorema dice eso. Y la regla de oro es que un programa tiene una puerta de entrada, una de salida y ningún pasillo que dé vueltas para siempre.</p></div>
+
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">Las tres estructuras</h3><p>Böhm y Jacopini demostraron en 1966 que cualquier programa propio se escribe solo con:</p><p><b>Secuencial</b>, <b>selectiva</b> (condicional) y <b>repetitiva</b>.</p></div>
+    <div class="card"><h3 style="margin-top:0">Programa propio</h3><p>Cumple las tres cosas a la vez:</p><p>1. Un único inicio y un único fin.<br>2. Hay un camino que pasa por todas las partes.<br>3. No tiene bucles infinitos.</p></div>
+    <div class="card"><h3 style="margin-top:0">Dijkstra</h3><p>Para hacer programas más potentes en menos tiempo hay que <b>simplificar</b> las herramientas, no complicarlas. Ayudó a salir de la "crisis del software" de finales de los 60.</p></div>
+  </div>
+  <div class="callout"><p>La POO (tema 3 en adelante) no sustituye a esto: dentro de cada método de una clase seguirás usando secuencial, selectiva y repetitiva. Por eso este tema es la base de todo lo demás.</p></div>
+
+  <h3>Test rápido</h3>
+  <div class="quiz" data-sec="estructurada"></div>
+
+<div class="callout"><p><b>Un detalle de los apuntes:</b> el ejemplo de la suma lee con <code>System.console().readLine()</code>. Aquí usamos <code>Scanner</code> (el método que se usa por ahora, apartado 10 del Tema 1).</p></div>
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Teorema (Böhm y Jacopini, 1966): secuencial + selectiva + repetitiva bastan.</li>
+    <li>Programa propio: un inicio, un fin, camino que recorre todo, sin bucles infinitos.</li>
+    <li>Dijkstra: simplificar herramientas para ser más productivos.</li>
+    <li>POO = programación estructurada + clases y objetos.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="inicio">Inicio</button><button class="btn primary" data-go="secuencial">Siguiente: secuencial</button></div>
+</section>
+
+<!-- 2.2 -->
+
+<!-- ================= p-secuencial ================= -->
+<section class="pane" id="p-secuencial">
+  <span class="tag">Apartado 2.2</span>
+  <h2>Estructura secuencial</h2>
+  <p class="lead">La más simple: cada instrucción se ejecuta después de la anterior, en el orden en que está escrita. Ninguna empieza hasta que la anterior termina.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Es una receta de cocina: paso 1, paso 2, paso 3, sin saltarte ninguno. No puedes batir los huevos antes de romperlos. En programación casi siempre es: <b>leer datos, calcular, mostrar el resultado</b>.</p></div>
+  <p>Este es el algoritmo de los apuntes, la suma de dos números. Mira cómo cambian las variables paso a paso.</p>
+  <div class="tracer" data-tracer="secuencial"></div>
+
+  <div class="callout warn"><p><b>Lo que suele fallar:</b> el orden. Si calculas <code>suma = a + b</code> antes de leer <code>a</code> y <code>b</code>, no tienen valor todavía (en Java ni siquiera compila).</p></div>
+
+  <h3>Predice la salida</h3>
+  <div class="preds" data-sec="secuencial"></div>
+
+  <h3>Test rápido</h3>
+  <div class="quiz" data-sec="secuencial"></div>
+
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Secuencial: acción 1, acción 2... acción N, una detrás de otra.</li>
+    <li>Esquema típico: leer datos, calcular, mostrar el resultado.</li>
+    <li>El orden de las instrucciones cambia el resultado.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="estructurada">Anterior</button><button class="btn primary" data-go="selectiva">Siguiente: selectiva</button></div>
+</section>
+
+<!-- 2.3 -->
+
+<!-- ================= p-selectiva ================= -->
+<section class="pane" id="p-selectiva">
+  <span class="tag">Apartado 2.3</span>
+  <h2>Estructura selectiva (condicional)</h2>
+  <p class="lead">Ejecuta uno de varios bloques según una condición. Hay tres tipos: simple, doble y múltiple.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Es un portero de discoteca o un semáforo: mira un dato y decide por qué camino sigues. <code>if</code> es "si pasa esto, haz esto". <code>else</code> es "si no, haz esto otro". Un <code>else if</code> es una fila de preguntas: la primera que se cumple gana y se acabó, ya no se miran las demás. Un <code>switch</code> es una máquina expendedora: pulsas un número y te da ese producto. Si no pones <code>break</code>, es como si además te cayeran todos los productos siguientes.</p></div>
+
+  <h3>Simple y doble</h3>
+<pre class="code" data-hl>if (condición) {
+    acciones          // solo si la condición es verdadera
+}
+
+if (condición) {
+    acciones01        // si es verdadera
+} else {
+    acciones02        // si es falsa
+}</pre>
+  <p>La condición es una expresión lógica (verdadera o falsa). Con tres <code>if</code> independientes para positivo, negativo y cero, Java comprueba las tres aunque la primera ya se haya cumplido. Con <code>if-else</code> te ahorras comprobaciones.</p>
+  <p><b>Operador ternario:</b> <code>(condición) ? valor1 : valor2</code>. Sirve para elegir entre dos valores (por ejemplo, asignar un mensaje a una variable). No lo uses para acciones complejas.</p>
+
+  <h3>Else if: el orden importa</h3>
+  <p>Las condiciones se evalúan de arriba abajo. En cuanto una es verdadera, se ejecuta su bloque y se sale. Prueba con distintas notas y cambia el orden de las condiciones.</p>
+  <div class="sim" id="sim-nota"></div>
+  <div class="callout"><p>Regla de los apuntes: ordena de lo más restrictivo a lo más general y comprueba primero los casos de error. <code>else if</code> para rangos o condiciones distintas, <code>switch</code> para comparar una misma expresión con valores concretos.</p></div>
+
+  <h3>Switch y el olvido del break</h3>
+  <p>Sin <code>break</code>, la ejecución sigue con los <code>case</code> siguientes (<em>fall-through</em>). Elige un día y quita o pon los <code>break</code>. Por defecto están quitados el del 3 y el del 4, como en el ejemplo de los apuntes.</p>
+  <div class="sim" id="sim-switch"></div>
+  <p>La sintaxis con flecha (<code>case 1, 2, 3 -&gt; ...</code>) no necesita <code>break</code> y evita este problema. La expresión del <code>switch</code> suele ser entera o un carácter; los reales normalmente no se admiten.</p>
+
+  <h3>Predice la salida</h3>
+  <div class="preds" data-sec="selectiva"></div>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="selectiva"></div>
+
+<div class="callout warn"><p><b>Dos avisos más de los apuntes:</b> evita <code>==</code> en las condiciones de salida de un bucle, sobre todo con números reales. Y una variable sin inicializar tiene un valor <b>desconocido</b>, no necesariamente 0. Además, todo <code>do-while</code> se puede escribir como <code>while</code>, pero no al revés; con el <code>while</code> se puede programar cualquier iteración.</p></div>
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li><code>if</code> simple, <code>if-else</code> doble, <code>else if</code> encadenado, <code>switch</code> múltiple.</li>
+    <li><code>else if</code> equivale a anidar un if-else dentro de un else, pero se lee mejor.</li>
+    <li>Ternario: solo para elegir entre dos valores.</li>
+    <li>Orden: casos de error primero, de lo más restrictivo a lo más general.</li>
+    <li><code>switch</code>: cada <code>case</code> acaba en <code>break</code> (clásico); <code>default</code> opcional; con <code>-&gt;</code> no hace falta.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="secuencial">Anterior</button><button class="btn primary" data-go="bucles">Siguiente: bucles</button></div>
+</section>
+
+<!-- 2.4 -->
+
+<!-- ================= p-bucles ================= -->
+<section class="pane" id="p-bucles">
+  <span class="tag">Apartado 2.4</span>
+  <h2>Estructura repetitiva (bucles)</h2>
+  <p class="lead">Repetir un conjunto de instrucciones un número finito de veces. Todo bucle tiene dos elementos: el <b>cuerpo</b> (lo que se repite) y la <b>condición de salida</b> (lo que lo detiene). Si nunca se cumple la salida, tienes un bucle infinito.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Es lavar platos: "mientras haya platos sucios, lava uno". <code>while</code>: miras antes de empezar (si no hay platos, no lavas nada). <code>do-while</code>: lavas uno y después miras si quedan (como mínimo lavas uno). <code>for</code>: "lava exactamente 10 platos". Un <b>contador</b> es ir diciendo "llevo 3". Un <b>acumulador</b> es una hucha: vas metiendo cosas. Un <b>conmutador</b> es un interruptor de luz: solo tiene dos posiciones.</p></div>
+
+  <div class="grid">
+    <div class="card"><b>while</b> (mientras)<p>La condición va al principio. El cuerpo puede no ejecutarse nunca.</p></div>
+    <div class="card"><b>do-while</b> (hacer mientras)<p>La condición va al final. El cuerpo se ejecuta al menos una vez.</p></div>
+    <div class="card"><b>for</b> (para)<p>Condición al principio y contador automático. Se usa si sabes cuántas vueltas habrá.</p></div>
+  </div>
+
+  <h3>Ejecútalos paso a paso</h3>
+  <p>Avanza con "Siguiente" y fíjate en qué línea está, cómo cambian las variables y qué se escribe. Compara el programa <code>while</code> con el <code>do-while</code>: la variable <code>n</code> empieza en 10 y la condición pide <code>n &lt; 5</code>.</p>
+  <div class="tracer" data-tracer="bucles"></div>
+
+  <h3>Cómo se lee un <code>for</code></h3>
+  <p>Un <code>for</code> junta en una sola línea las tres cosas que en un <code>while</code> escribirías separadas.</p>
+<pre class="code" data-hl>for (int i = 1; i &lt;= 10; i++) {
+    System.out.println(i);
+}</pre>
+  <div class="grid">
+    <div class="card"><b>1. Inicialización</b><p><code>int i = 1</code>: "empiezo contando en 1". Se hace una sola vez, al principio.</p></div>
+    <div class="card"><b>2. Condición</b><p><code>i &lt;= 10</code>: "sigo mientras no pase de 10". Se mira antes de cada vuelta.</p></div>
+    <div class="card"><b>3. Incremento</b><p><code>i++</code>: "al acabar cada vuelta, sumo 1". Es lo mismo que <code>i = i + 1</code>.</p></div>
+  </div>
+
+  <h3>Contadores, acumuladores y conmutadores</h3>
+  <div class="grid">
+    <div class="card"><b>Contador</b><p>Entero que sube o baja en cada vuelta (<code>i++</code>, <code>i--</code>). Se inicializa antes, se modifica en el cuerpo y se usa en la condición de salida.</p></div>
+    <div class="card"><b>Acumulador</b><p>Guarda resultados sucesivos: <code>acum = acum + n</code>. Se inicializa antes del bucle, normalmente a 0.</p></div>
+    <div class="card"><b>Conmutador</b><p>Variable de solo dos valores (normalmente <code>boolean</code>) que controla la salida. Si toma más de dos valores y uno de ellos termina el bucle, es un <b>valor centinela</b>.</p></div>
+  </div>
+  <div class="callout warn"><p><b>Tres errores clásicos:</b> no dar valor inicial al contador o acumulador; no modificar la variable de la condición (bucle infinito); equivocarte con <code>&lt;</code> frente a <code>&lt;=</code> y repetir una vuelta de más o de menos.</p></div>
+
+  <h3>Predice la salida</h3>
+  <div class="preds" data-sec="bucles"></div>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="bucles"></div>
+
+<div class="callout warn"><p><b>Ojo:</b> según los apuntes, el único uso racional de <code>break</code> es dentro de un <code>switch</code>, y si necesitas <code>continue</code> probablemente el bucle está mal planteado. Los ejercicios con <code>break</code> y <code>continue</code> son solo para practicar la sintaxis. El <code>return</code> debería ser, idealmente, la última instrucción de un método, con un único punto de entrada y uno de salida.</p></div>
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Bucle = cuerpo + condición de salida. Número de repeticiones finito.</li>
+    <li><code>while</code>: condición al inicio. <code>do-while</code>: al final, mínimo una vez. <code>for</code>: sabes las repeticiones.</li>
+    <li><code>for (inicialización; condición; incremento)</code>.</li>
+    <li>Contador: inicializar, modificar, usar en la condición. Acumulador: <code>acum = acum + n</code>, empieza en 0.</li>
+    <li>Conmutador: 2 valores. Centinela: valor especial que termina el bucle.</li>
+    <li>Con reales evita <code>==</code> en las condiciones.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="selectiva">Anterior</button><button class="btn primary" data-go="saltos">Siguiente: saltos</button></div>
+</section>
+
+<!-- 2.5 -->
+
+<!-- ================= p-saltos ================= -->
+<section class="pane" id="p-saltos">
+  <span class="tag">Apartado 2.5</span>
+  <h2>Instrucciones de salto</h2>
+  <p class="lead">Alteran el flujo normal del programa. Los apuntes avisan: están prohibidas salvo casos muy justificados, así que úsalas lo menos posible. Son tres: <code>break</code>, <code>continue</code> y <code>return</code>.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Son botones de emergencia. <code>break</code> es "me voy de aquí ya". <code>continue</code> es "este plato no, paso al siguiente". <code>return</code> es "se acabó mi turno, me voy a casa". Y la <b>cláusula guardián</b> es un portero: si no cumples los requisitos, te para en la puerta y te despide. No te deja entrar hasta el fondo para darse cuenta allí.</p></div>
+
+  <div class="grid">
+    <div class="card"><b>break</b><p>Sale inmediatamente del bloque actual (<code>if</code>, <code>switch</code> o <code>for</code>). Su uso habitual es dentro de un <code>switch</code>.</p></div>
+    <div class="card"><b>continue</b><p>Salta el resto de la iteración actual y pasa a la siguiente. Si lo necesitas, probablemente el bucle está mal planteado.</p></div>
+    <div class="card"><b>return</b><p>Termina el método. En un <code>void</code> se escribe sin valor (<code>return;</code>). Si lo llamas desde <code>main</code>, el programa termina.</p></div>
+  </div>
+
+  <h3>break y continue en acción</h3>
+  <div class="tracer" data-tracer="saltos"></div>
+
+  <h3>Cláusulas guardián</h3>
+  <p>Son comprobaciones al principio de un método que descartan los casos no válidos y salen enseguida con <code>return</code>. Comparar los dos estilos del ejemplo de la entrada según la edad:</p>
+  <div class="two">
+    <div><h4>Con ifs anidados ("código flecha")</h4>
+<pre class="code" data-hl>if (edad &gt;= 0) {
+    if (edad &lt;= 120) {
+        if (edad &lt; 12) {
+            System.out.println("Precio: 5 €");
+        } else {
+            System.out.println("Precio: 9 €");
+        }
+    } else {
+        System.out.println("Edad demasiado alta.");
+    }
+} else {
+    System.out.println("La edad no puede ser negativa.");
+}</pre></div>
+    <div><h4>Con cláusulas guardián</h4>
+<pre class="code" data-hl>if (edad &lt; 0) {
+    System.out.println("La edad no puede ser negativa.");
+    return;
+}
+if (edad &gt; 120) {
+    System.out.println("Edad demasiado alta.");
+    return;
+}
+// A partir de aquí la edad es válida
+if (edad &lt; 12) {
+    System.out.println("Precio: 5 €");
+} else {
+    System.out.println("Precio: 9 €");
+}</pre></div>
+  </div>
+  <div class="callout"><p>Buenas prácticas: ponlas siempre al inicio del método, que cada una sea corta (una comprobación, una acción, <code>return</code>) y no repartas más <code>return</code> por mitad del algoritmo.</p></div>
+  <div class="callout warn"><p>En un <code>void</code>, <code>return 5;</code> no compila. El código después de un <code>return</code> en el mismo bloque es inalcanzable y Java no lo compila.</p></div>
+
+  <h3>Predice la salida</h3>
+  <div class="preds" data-sec="saltos"></div>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="saltos"></div>
+
+<div class="callout"><p><b>Más reglas de estilo de los apuntes:</b> un algoritmo tiene <b>cabecera</b> (nombre, parámetros y tipo devuelto; en Java es obligatoria), <b>declaraciones</b> (en Java, en cualquier punto pero antes del primer uso) y <b>acciones</b>. Si un bloque tiene <b>una sola instrucción</b> puede escribirse sin llaves (excepción admitida: el <code>catch</code> que no trata la excepción de forma especial, la «licencia poética»). Una instrucción por línea («pulsar Intro es gratis»), espacios que separen sin exceso y líneas en blanco entre bloques. En un procesador de texto para papel, fuente de ancho fijo como Courier. <b>Documentación externa</b> (fuera del código): especificación de requisitos (análisis), diagramas de flujo y UML (análisis y diseño), documentación de la API con Javadoc (codificación), guía de instalación y manual de usuario (explotación). No documentes en exceso: puede hacer el código más ilegible.</p></div>
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li><code>break</code>: sale del bloque; uso normal en <code>switch</code>.</li>
+    <li><code>continue</code>: pasa a la siguiente iteración.</li>
+    <li><code>return</code>: termina el método; en <code>void</code> sin valor.</li>
+    <li>Cláusula guardián: validar al principio y salir. Evita el anidamiento y separa validación de lógica.</li>
+    <li>Un único punto de entrada y de salida es la tradición: usa saltos solo si compensa.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="bucles">Anterior</button><button class="btn primary" data-go="estilo">Siguiente: reglas de estilo</button></div>
+</section>
+
+<!-- 2.6 -->
+
+<!-- ================= p-estilo ================= -->
+<section class="pane" id="p-estilo">
+  <span class="tag">Apartado 2.6</span>
+  <h2>Reglas de estilo</h2>
+  <p class="lead">Un programa tiene que funcionar, pero también tiene que poder leerlo una persona. Casi siempre esa persona serás tú dentro de tres meses, sin acordarte de nada.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Es como los apuntes de clase. Si escribes con letra clara, títulos y márgenes, los entiendes al repasar. Si lo escribes todo apelotonado, ni tú te enteras. Las reglas de estilo son ponerle "buena letra" al código. Al ordenador le da igual; a las personas no.</p></div>
+
+  <h3>Las tres partes de un algoritmo</h3>
+  <div class="grid">
+    <div class="card"><b>1. Cabecera</b><p>El nombre del método, los datos que recibe y el tipo de lo que devuelve. En Java es obligatoria.</p></div>
+    <div class="card"><b>2. Declaraciones</b><p>Las variables y constantes que va a usar. En Java puedes declararlas donde quieras, siempre antes de usarlas.</p></div>
+    <div class="card"><b>3. Acciones</b><p>Las instrucciones: lo que hace el algoritmo.</p></div>
+  </div>
+<pre class="code" data-hl>public static int sumarNumeros(int n, int m) {   // CABECERA
+    int suma;                                    // DECLARACIONES
+    if (n &lt;= m) {                                // ACCIONES (desde aquí)
+        suma = 0;
+        for (int i = n; i &lt;= m; i++) {
+            suma = suma + i;
+        }
+    } else {
+        suma = -1;
+    }
+    return suma;
+}</pre>
+
+  <h3>Documentación: contar qué hace tu código</h3>
+  <div class="grid">
+    <div class="card"><b>Interna</b><p>Los <b>comentarios</b> dentro del código. El ordenador los ignora. Explican <b>cómo</b> está hecho.</p><p><code>// una línea</code><br><code>/* varias líneas */</code></p></div>
+    <div class="card"><b>Externa</b><p>Documentos fuera del programa: requisitos, diagramas, guía de instalación, manual de usuario. Explican <b>qué</b> debe hacer, cómo está organizado y cómo se usa.</p></div>
+  </div>
+  <div class="callout warn"><p>Los comentarios deben ayudar, no estorbar. Comentar cada línea hace el código ilegible. Comenta solo donde haga falta una explicación.</p></div>
+
+  <h3>Javadoc: comentarios que se convierten en una web</h3>
+  <p>Javadoc es un formato especial de comentario que empieza por <code>/**</code>. Se escribe justo <b>antes</b> de una clase, atributo o método, y con él se genera automáticamente la documentación de la API en HTML. Dentro se usan etiquetas que empiezan por <code>@</code>.</p>
+  <div class="tw"><table class="t"><thead><tr><th>Etiqueta</th><th>Para qué sirve</th></tr></thead><tbody>
+    <tr><td><code>@author</code></td><td>Nombre del desarrollador (clases)</td></tr>
+    <tr><td><code>@version</code></td><td>Versión de la clase o método</td></tr>
+    <tr><td><code>@param</code></td><td>Describe cada parámetro. Obligatorio para todos.</td></tr>
+    <tr><td><code>@return</code></td><td>Describe lo que devuelve. No se usa en constructores ni en métodos <code>void</code>.</td></tr>
+    <tr><td><code>@throws</code> / <code>@exception</code></td><td>Excepción que lanza el método</td></tr>
+    <tr><td><code>@see</code></td><td>Enlaza con otro método o clase</td></tr>
+    <tr><td><code>@deprecated</code></td><td>Está obsoleto y posiblemente desaparecerá</td></tr>
+  </tbody></table></div>
+<pre class="code" data-hl>/**
+ * Suma los números naturales entre n y m, ambos incluidos.
+ *
+ * @param n primer número del intervalo
+ * @param m último número del intervalo
+ * @return la suma, o -1 si n es mayor que m
+ */
+public static int sumarNumeros(int n, int m) {
+    ...
+}</pre>
+
+  <h3>Estilo de escritura</h3>
+  <p>Mira el mismo método escrito mal y bien. Hace exactamente lo mismo.</p>
+  <div class="two">
+    <div><h4>Mal: apelotonado y con nombres raros</h4>
+<pre class="code" data-hl>public static int sumarNumeros(int n,int m){int s;if(n&lt;=m){s=0;for(int i=n;i&lt;=m;i++){s=s+i;}}else{s=-1;}return s;}</pre></div>
+    <div><h4>Bien: ordenado y legible</h4>
+<pre class="code" data-hl>public static int sumarNumeros(int n, int m) {
+    int suma;
+    if (n &lt;= m) {
+        suma = 0;
+        for (int i = n; i &lt;= m; i++) {
+            suma = suma + i;
+        }
+    } else {
+        suma = -1;
+    }
+    return suma;
+}</pre></div>
+  </div>
+  <div class="grid">
+    <div class="card"><b>Sangría</b><p>Lo que está dentro de un bloque lleva más sangría que la línea que lo abre. La llave de cierre se alinea con la línea que abre.</p></div>
+    <div class="card"><b>Llaves</b><p>Puedes abrir la llave en la misma línea o en la siguiente. Lo importante es ser <b>consistente</b>. En Java se usa más en la misma línea.</p></div>
+    <div class="card"><b>Una instrucción por línea</b><p>Con excepciones justificadas, como declarar varias variables juntas.</p></div>
+    <div class="card"><b>Espacios y líneas en blanco</b><p><code>if (a &gt; b)</code> se lee mejor que <code>if (a&gt;b)</code>. Deja una línea en blanco entre bloques si ayuda.</p></div>
+  </div>
+
+  <h3>Elegir nombres (identificadores)</h3>
+  <ul>
+    <li><b>Significativos:</b> <code>edad</code> sí; <code>X</code>, <code>A</code> o <code>cosa</code> no.</li>
+    <li><b>Lo más cortos posible</b> sin perder claridad: <code>edadEmpleado</code> mejor que <code>edad_de_los_empleados</code>, pero nada de abreviaturas ilegibles como <code>ed_em</code>.</li>
+    <li><b>camelCase:</b> <code>edadEmpleado</code>. <b>snake_case:</b> <code>edad_empleado</code>. Elige uno y sé consistente.</li>
+    <li>Java distingue mayúsculas de minúsculas: <code>edad</code>, <code>Edad</code> y <code>EDAD</code> son tres identificadores distintos.</li>
+  </ul>
+  <div class="tw"><table class="t"><thead><tr><th>Qué es</th><th>Convención en Java</th><th>Ejemplo</th></tr></thead><tbody>
+    <tr><td>Clases y paquetes</td><td>UpperCamelCase</td><td><code>AdivinaNumero</code></td></tr>
+    <tr><td>Constantes</td><td>MAYÚSCULAS</td><td><code>MAX_INTENTOS</code></td></tr>
+    <tr><td>Todo lo demás (variables, métodos)</td><td>lowerCamelCase</td><td><code>edadEmpleado</code></td></tr>
+  </tbody></table></div>
+
+  <h3>Practica: ¿cómo se escribe cada nombre?</h3>
+  <div class="sim" id="sim-ids"></div>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="estilo"></div>
+
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Partes: cabecera (obligatoria en Java), declaraciones, acciones.</li>
+    <li>Interna = comentarios (<code>//</code>, <code>/* */</code>): el cómo. Externa = documentos: el qué y cómo se usa.</li>
+    <li>Javadoc: <code>/** ... */</code>, etiquetas <code>@param</code> (todos), <code>@return</code> (no en void ni constructores).</li>
+    <li>Sangría, llaves consistentes, una instrucción por línea, espacios.</li>
+    <li>Clases UpperCamelCase, constantes MAYÚSCULAS, resto lowerCamelCase. Java distingue mayúsculas.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="saltos">Anterior</button><button class="btn primary" data-go="excepciones">Siguiente: excepciones</button></div>
+</section>
+
+<!-- 2.7 -->
+
+<!-- ================= p-excepciones ================= -->
+<section class="pane" id="p-excepciones">
+  <span class="tag">Apartado 2.7</span>
+  <h2>Excepciones</h2>
+  <p class="lead">Una excepción es algo inesperado que ocurre mientras el programa se ejecuta y lo interrumpe (un <em>crash</em>). Dividir entre cero, abrir un fichero que no existe o escribir letras donde se esperaba un número son ejemplos típicos.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Vas a sacar dinero del cajero y no tienes saldo. Un cajero mal hecho se bloquearía. Uno bien hecho dice "saldo insuficiente" y te deja seguir. <code>try</code> significa "intenta esto". <code>catch</code> significa "si falla de esta manera, haz esto otro". <code>finally</code> es "pase lo que pase, haz esto al final", como recoger la tarjeta.</p></div>
+
+  <h3>try, catch y finally</h3>
+<pre class="code" data-hl>try {
+    // código que puede fallar
+} catch (ArithmeticException e) {
+    // qué hacer si falla por una operación aritmética
+} catch (InputMismatchException e) {
+    // qué hacer si el dato escrito no era del tipo esperado
+} finally {
+    // opcional: se ejecuta SIEMPRE, haya error o no
+}
+// el programa continúa aquí con normalidad</pre>
+  <ul>
+    <li>No puedes poner dos <code>catch</code> para el mismo tipo de excepción.</li>
+    <li>Ordénalos de lo más <b>específico</b> a lo más <b>genérico</b>: <code>ArithmeticException</code> antes que <code>Exception</code>.</li>
+    <li>La entrada de datos es lo que más falla: el usuario puede escribir cualquier cosa. Por eso <code>nextInt()</code> se encierra en un <code>try-catch</code>.</li>
+    <li><code>printStackTrace()</code> ayuda a depurar, pero hay que quitarlo en la versión final para no asustar al usuario.</li>
+  </ul>
+  <div class="eli"><span class="l">Muy importante</span><p>Las excepciones se usan con <b>mesura y planificación</b>: no sirven para cualquier circunstancia (más abajo, el apartado «Mal uso»).</p></div>
+  <h3>7.1.1 Control de excepciones en la entrada de datos</h3>
+  <p>La entrada que viene de fuera es lo más difícil de controlar, porque puede llegar <b>cualquier cosa</b>: un error al teclear, una letra donde va un número, una cadena vacía o incluso texto malicioso. Por eso lo habitual es envolver la lectura en un <code>try-catch</code>. El punto que puede fallar es la <b>conversión</b> del texto escrito a <code>int</code>.</p>
+  <pre class="code" data-hl>import java.util.Scanner;
+
+public class Suma {
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+        int s1, s2, suma;
+
+        try {
+            System.out.print("Sumando 1 : ");
+            s1 = teclado.nextInt();
+            System.out.print("Sumando 2 : ");
+            s2 = teclado.nextInt();
+        } catch (Exception e) {
+            System.out.println("ERROR! Asegúrese de haber introducido dos números");
+            s1 = 0;
+            s2 = 0;
+            e.printStackTrace();   // solo para depurar: quítalo en la versión final
+        }
+        suma = s1 + s2;
+        System.out.println("La suma es " + s1 + "+" + s2 + "=" + suma);
+        teclado.close();
+    }
+}</pre>
+  <p>Si escribes <code>3</code> y <code>4</code>, muestra <code>La suma es 3+4=7</code>. Si escribes una letra, salta la excepción, el <code>catch</code> avisa, pone los dos sumandos a 0 y el programa <b>sigue</b> en lugar de romperse. <code>printStackTrace()</code> enseña información técnica útil mientras programas, pero el usuario final no debe verla.</p>
+  <h4>Pedir el dato hasta que sea válido</h4>
+  <p>Lo más habitual en la entrada de datos es <b>repetir la pregunta</b> hasta que el usuario escriba algo correcto. Se combina un <code>do-while</code> con un <code>try-catch</code>: si <code>nextInt()</code> lanza <code>InputMismatchException</code>, se avisa y se vuelve a preguntar.</p>
+  <pre class="code" data-hl>boolean valido = false;
+int numero = 0;
+do {
+    try {
+        System.out.print("Número: ");
+        numero = teclado.nextInt();
+        valido = true;
+    } catch (InputMismatchException e) {
+        System.out.println("Eso no es un número.");
+        teclado.nextLine();   // retira del buffer lo que se escribió mal
+    }
+} while (!valido);
+System.out.println("Has escrito " + numero);</pre>
+  <p>Fíjate en <code>teclado.nextLine()</code> dentro del <code>catch</code>: si no retiras el texto incorrecto, <code>nextInt()</code> lo vuelve a leer una y otra vez y el bucle no termina. La variable <code>valido</code> es un <b>conmutador</b>.</p>
+
+  <h3>Pruébalo tú: dividir dos números</h3>
+  <p>Escribe dos valores y mira qué líneas se ejecutan (las que se iluminan). Prueba con <code>10</code> y <code>2</code>, con <code>10</code> y <code>0</code>, y con <code>hola</code>.</p>
+  <div class="sim" id="sim-try"></div>
+
+  <h3>Crear tus propias excepciones</h3>
+  <p>Hay dos formas. La primera, lanzar con <code>throw</code> una excepción que ya existe pero con tu propio mensaje:</p>
+<pre class="code" data-hl>public static void registrarUsuario(int edad) {
+    if (edad &lt; 18) {
+        throw new IllegalArgumentException("ERROR! Es menor de edad.");
+    }
+    System.out.println("Usuario registrado.");
+}
+
+// en main, para que el programa no termine con el error:
+try {
+    registrarUsuario(33);
+    registrarUsuario(3);
+    System.out.println("Se han registrado los dos usuarios");
+} catch (IllegalArgumentException e) {
+    System.out.println("El proceso de registro se ha cancelado.");
+    System.out.println("El motivo: " + e.getMessage());
+}</pre>
+  <p>La segunda, crear una clase nueva. Debe extender de <code>Exception</code>, su nombre acaba en <code>Exception</code> y su constructor pasa el mensaje a la clase padre con <code>super</code>. El método que la lanza lo avisa con <code>throws</code> en la cabecera:</p>
+<pre class="code" data-hl>public class MenorEdadException extends Exception {
+    public MenorEdadException(String mensaje) {
+        super(mensaje);
+    }
+}
+
+public static void registrarUsuario(int edad) throws MenorEdadException {
+    if (edad &lt; 18) {
+        throw new MenorEdadException("ERROR! Es menor de edad.");
+    }
+    System.out.println("Usuario registrado");
+}</pre>
+  <div class="tw"><table class="t"><thead><tr><th></th><th>No comprobadas</th><th>Comprobadas</th></tr></thead><tbody>
+    <tr><td>Extienden de</td><td><code>RuntimeException</code> (como <code>IllegalArgumentException</code>)</td><td><code>Exception</code></td></tr>
+    <tr><td>¿Obliga el compilador a declararlas?</td><td>No</td><td>Sí: con <code>throws</code>, o no compila. Quien llama debe capturarlas o declararlas.</td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><p><b>Mal uso:</b> no uses excepciones para situaciones normales (por ejemplo, salir de un bucle de lectura cuando el usuario escribe una letra). Es un error de diseño, es lento y se entiende peor que un <code>while</code> bien hecho. Resérvalas para errores de verdad excepcionales.</p></div>
+
+  <h3>Predice la salida</h3>
+  <div class="preds" data-sec="excepciones"></div>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="excepciones"></div>
+
+<div class="callout"><p><b>Versiones de prueba y <code>assert</code> en el IDE:</b> <b>alfa</b> (completa pero inestable, grupo reducido), <b>beta</b> (más estable, muchos usuarios reportan errores), <b>release candidate (RC)</b> (lista salvo correcciones de última hora) y <b>versión final</b>. Para que los <code>assert</code> funcionen hay que añadir la opción de VM <code>-ea</code> en la configuración de ejecución (en proyectos Maven de NetBeans suele hacer falta la propiedad <code>exec.vmArgs</code>); con <code>-ea</code> un assert falso lanza <code>AssertionError</code> y sin <code>-ea</code> no tiene efecto. No se usan en pruebas de integración o de sistema ni para validar datos del usuario (eso son condicionales); los errores de entorno o comunicación se tratan con excepciones. Los <code>assert</code> van dentro del código; las aserciones de JUnit (<code>assertEquals</code>, <code>assertTrue</code>) van en clases de prueba separadas.</p></div>
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Excepción = suceso inesperado en ejecución que interrumpe el programa.</li>
+    <li><code>try</code> (lo que puede fallar), <code>catch</code> (cómo reaccionar), <code>finally</code> (siempre, opcional).</li>
+    <li><code>catch</code>: de lo específico a lo genérico; no repetir tipo.</li>
+    <li><code>throw new ...</code> lanza; <code>throws</code> en la cabecera avisa.</li>
+    <li>Propia: <code>extends Exception</code>, nombre acaba en <code>Exception</code>, <code>super(mensaje)</code>.</li>
+    <li>RuntimeException = no comprobada. Exception = comprobada.</li>
+    <li>No usar excepciones para situaciones normales.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="estilo">Anterior</button><button class="btn primary" data-go="pruebas">Siguiente: pruebas</button></div>
+</section>
+
+<!-- 2.8 -->
+
+<!-- ================= p-pruebas ================= -->
+<section class="pane" id="p-pruebas">
+  <span class="tag">Apartado 2.8</span>
+  <h2>Pruebas</h2>
+  <p class="lead">Escribir el programa es solo el primer paso. Hay que comprobar que no falla al ejecutarse, que hace lo que debe y que es eficiente. La frase de los apuntes lo resume: nunca confíes en que tu código funciona como crees.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Antes de vender un coche lo pruebas: frenos, luces, arrancar en frío, subir una cuesta. No esperas a que el cliente se quede tirado. Probar un programa es intentar romperlo tú antes de que lo haga otro. Y lo que no encuentras no significa que no exista: las pruebas no demuestran que no hay errores, solo que no los has encontrado.</p></div>
+
+  <h3>Verificación y validación</h3>
+  <div class="grid">
+    <div class="card"><b>Verificación</b><p>¿Estamos construyendo bien el producto? Comprueba que no hay errores de ejecución.</p></div>
+    <div class="card"><b>Validación</b><p>¿Estamos construyendo el producto correcto? Comprueba que cumple lo que pidió el cliente.</p></div>
+  </div>
+
+  <h3>Tipos de pruebas según el momento</h3>
+  <div class="tw"><table class="t"><thead><tr><th>Prueba</th><th>Qué prueba</th></tr></thead><tbody>
+    <tr><td>Unitaria</td><td>Un componente aislado (método o clase), cuando lo terminas. Es la que más se usa en esta unidad.</td></tr>
+    <tr><td>De integración</td><td>Varios componentes juntos.</td></tr>
+    <tr><td>De sistema</td><td>El programa completo, al final del desarrollo.</td></tr>
+    <tr><td>De carga</td><td>Cómo se comporta con un volumen de datos real. Con 20 registros va bien; con 200 000 puede fallar o ir muy lento.</td></tr>
+    <tr><td>De aceptación</td><td>El cliente da su visto bueno, al final de todo.</td></tr>
+  </tbody></table></div>
+
+  <h3>Caja negra y caja blanca</h3>
+  <div class="grid">
+    <div class="card"><b>Caja negra</b><p>No miras el código: pruebas qué entra y qué sale. Como no puedes probar todos los valores, los agrupas en <b>clases de equivalencia</b> (datos que el programa trata igual) y pruebas un valor de cada grupo.</p></div>
+    <div class="card"><b>Caja blanca</b><p>Miras el código y haces que cada camino se ejecute al menos una vez: condiciones verdaderas y falsas, bucles con 0, 1 y varias vueltas, y las llamadas a otros bloques.</p></div>
+  </div>
+  <p>Ejemplo de los apuntes: un método <code>calcularEdad(día, mes, año)</code>. Cada parámetro tiene una clase válida y clases no válidas. Prueba a clasificar valores:</p>
+  <div class="sim" id="sim-clases"></div>
+  <ul>
+    <li>Además de un valor de cada clase, prueba los <b>valores límite</b> (los bordes), los <b>errores típicos de usuario</b> (un año de dos cifras) y los <b>valores imposibles</b> (texto donde se espera un número).</li>
+    <li>Las clases no lo detectan todo: el 30 de febrero pasa los rangos, pero no existe.</li>
+  </ul>
+
+  <h3>Versiones de prueba</h3>
+  <div class="tw"><table class="t"><thead><tr><th>Versión</th><th>Cómo es</th></tr></thead><tbody>
+    <tr><td>Alfa</td><td>Completa pero inestable. La prueba un grupo reducido.</td></tr>
+    <tr><td>Beta</td><td>Más estable. La prueban muchos usuarios que reportan errores.</td></tr>
+    <tr><td>Release candidate (RC)</td><td>Terminada, a falta de últimas correcciones.</td></tr>
+    <tr><td>Final</td><td>La que se publica.</td></tr>
+  </tbody></table></div>
+
+  <h3>Recomendaciones</h3>
+  <ul>
+    <li>Que pruebe alguien que no ha programado el código. Quien lo escribe prueba sin querer solo lo que sabe que funciona.</li>
+    <li>Escribe los casos de prueba y el resultado esperado <b>antes</b> de ejecutarlos.</li>
+    <li>Si aparece un error, probablemente haya más cerca. Revisa esa zona.</li>
+    <li>Si las pruebas no encuentran nada, desconfía de las pruebas.</li>
+  </ul>
+
+  <h3>Aserciones: <code>assert</code></h3>
+  <p>Una aserción afirma algo que <b>siempre</b> debe ser cierto en un punto del programa. Si es falso, el programa se detiene: hay un error de lógica.</p>
+<pre class="code" data-hl>assert condicion;
+assert condicion : "mensaje de error";   // recomendada</pre>
+  <ul>
+    <li>Hay que activarlas con el argumento de la máquina virtual <code>-ea</code>. Sin él, Java ni las evalúa.</li>
+    <li>Sirven para programación defensiva: comprobar invariantes (lo que nunca debe cambiar) y postcondiciones (que el resultado es correcto antes de devolverlo).</li>
+    <li>Úsalas en pruebas <b>unitarias</b> (lógica de tu propio código). No las uses para validar datos del usuario ni para fallos de integración (base de datos, red): ahí van condicionales y excepciones, porque en producción <code>-ea</code> está desactivado.</li>
+  </ul>
+  <p>Mira por qué: un programador calcula mal un descuento y suma en lugar de restar.</p>
+  <div class="sim" id="sim-assert"></div>
+
+  <h3>Predice la salida</h3>
+  <div class="preds" data-sec="pruebas"></div>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="pruebas"></div>
+
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Verificación: ¿bien construido? Validación: ¿producto correcto?</li>
+    <li>Tipos: unitaria, integración, sistema, carga, aceptación.</li>
+    <li>Caja negra: entradas y salidas, clases de equivalencia + valores límite. Caja blanca: cubrir caminos (bucles con 0, 1 y varias vueltas).</li>
+    <li>Versiones: alfa, beta, RC, final.</li>
+    <li><code>assert cond : "msg";</code> con <code>-ea</code>. Para unitarias; no para usuario ni integración.</li>
+    <li>Las pruebas no demuestran que no haya errores.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="excepciones">Anterior</button><button class="btn primary" data-go="depuracion">Siguiente: depuración</button></div>
+</section>
+
+<!-- 2.9 -->
+
+<!-- ================= p-depuracion ================= -->
+<section class="pane" id="p-depuracion">
+  <span class="tag">Apartado 2.9</span>
+  <h2>Depuración de programas</h2>
+  <p class="lead">Las pruebas te dicen <b>que</b> hay un error. Depurar es averiguar <b>dónde</b> está y <b>por qué</b> pasa.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Eres un detective. El programa es una película y el depurador es el mando a distancia: puedes pausar, avanzar fotograma a fotograma y mirar el valor de cada variable. Así ves el momento exacto en que algo se tuerce, en vez de adivinarlo.</p></div>
+
+  <h3>Los tres tipos de errores</h3>
+  <div class="grid">
+    <div class="card"><b>De compilación</b><p>Los detecta el compilador y el IDE los subraya. Ejemplo: falta un <code>;</code> o usas una variable sin declarar.</p></div>
+    <div class="card"><b>De ejecución</b><p>El programa arranca y la JVM lanza una excepción. Ejemplo: dividir un entero entre cero, o un <code>InputMismatchException</code> (cuando el usuario escribe letras donde se pedía un número).</p></div>
+    <div class="card"><b>Lógicos</b><p>Funciona, no da error, pero el resultado es incorrecto. Ejemplo: un bucle que da una vuelta de menos. Nadie los detecta solo: son los más traicioneros.</p></div>
+  </div>
+  <p>Poner <code>System.out.println()</code> por todas partes sirve, pero obliga a añadir y quitar código. La herramienta adecuada es el <b>depurador</b> del IDE.</p>
+
+  <h3>Qué puedes hacer con el depurador</h3>
+  <ul>
+    <li><b>Punto de ruptura (breakpoint):</b> una línea donde el programa se detiene antes de ejecutarla. Solo funciona en modo depuración. Ponlo un poco antes de la zona sospechosa.</li>
+    <li><b>Avanzar paso a paso</b> y <b>ver las variables</b> y cómo cambian.</li>
+    <li><b>Pila de llamadas (Call Stack):</b> la cadena de métodos que llevó hasta la línea actual. Es la misma información que la traza de una excepción.</li>
+    <li><b>Punto de ruptura condicional:</b> solo detiene el programa si se cumple una condición, por ejemplo <code>b == 0</code>. Útil si el error sale en una vuelta muy avanzada de un bucle.</li>
+  </ul>
+  <div class="tw"><table class="t"><thead><tr><th>Acción (NetBeans)</th><th>Qué hace</th><th>Atajo</th></tr></thead><tbody>
+    <tr><td>Punto de ruptura</td><td>Activa o quita un breakpoint</td><td>clic en el número de línea o <code>Ctrl+F8</code></td></tr>
+    <tr><td>Debug Project</td><td>Ejecuta en modo depuración</td><td><code>Ctrl+F5</code></td></tr>
+    <tr><td>Step Over</td><td>Ejecuta la línea entera sin entrar en los métodos que llame</td><td><code>F8</code></td></tr>
+    <tr><td>Step Into</td><td>Entra dentro del método llamado</td><td><code>F7</code></td></tr>
+    <tr><td>Step Out</td><td>Termina el método actual y vuelve al que lo llamó</td><td><code>Ctrl+F7</code></td></tr>
+    <tr><td>Run to Cursor</td><td>Continúa hasta la línea donde está el cursor</td><td><code>F4</code></td></tr>
+    <tr><td>Continue</td><td>Sigue hasta el siguiente breakpoint o el final</td><td><code>F5</code></td></tr>
+    <tr><td>Finish</td><td>Detiene la depuración</td><td><code>Mayús+F5</code></td></tr>
+    <tr><td>Ventana Variables</td><td>Muestra los valores actuales</td><td><code>Alt+Mayús+1</code></td></tr>
+    <tr><td>Ventana Call Stack</td><td>Muestra la pila de llamadas</td><td><code>Alt+Mayús+3</code></td></tr>
+  </tbody></table></div>
+  <p>Con otros IDE las operaciones son las mismas pero los atajos cambian. De momento tus programas están en <code>main</code>, así que usarás sobre todo Step Over y Continue.</p>
+
+  <h3>Ejemplo: un error lógico escondido</h3>
+  <p>Este programa debería calcular la media de los números del 1 al 10 (5,5), pero muestra 5.0. No hay errores de compilación ni excepciones. Hazte el depurador: avanza paso a paso y mira las variables. Hay <b>dos</b> errores, y el segundo se esconde detrás del primero. Empieza con el primer programa y ve probando los otros.</p>
+  <div class="tracer" data-tracer="depuracion"></div>
+  <div class="callout"><p><b>Qué has visto.</b> Error 1: con <code>i &lt; 10</code> el bucle no llega al 10, así que la condición debe ser <code>i &lt;= 10</code>. Error 2: <code>suma / contador</code> son dos <code>int</code>, así que es una división entera y se pierden los decimales (55 / 10 da 5). Se arregla convirtiendo un operando: <code>(double) suma / contador</code>. El segundo error quedaba oculto porque con el bucle mal, la media daba justo 5, y parecía razonable. Por eso hay que mirar cada variable, no solo el resultado final.</p></div>
+
+  <h3>Cómo depurar bien</h3>
+  <ol>
+    <li>Reproduce el error y averigua con qué datos de entrada ocurre.</li>
+    <li>Piensa una hipótesis y usa el depurador para confirmarla o descartarla.</li>
+    <li>Acota: pon el breakpoint cerca del error y muévelo hasta encontrar la primera línea donde una variable toma un valor incorrecto.</li>
+    <li>Corrige <b>un</b> error cada vez y vuelve a probar.</li>
+    <li>Añade una prueba o una aserción que lo detecte si reaparece.</li>
+  </ol>
+
+  <h3>Predice la salida</h3>
+  <div class="preds" data-sec="depuracion"></div>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="depuracion"></div>
+
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Errores: compilación (compilador), ejecución (excepción), lógicos (resultado mal, sin aviso).</li>
+    <li>Probar = detectar que hay error. Depurar = encontrar dónde y por qué.</li>
+    <li>Breakpoint, Step Over (F8), Step Into (F7), Step Out (Ctrl+F7), Continue (F5), Run to Cursor (F4).</li>
+    <li>Variables, watches, Call Stack, breakpoints condicionales.</li>
+    <li>Ejemplo media: <code>i &lt;= 10</code> y <code>(double) suma / contador</code>.</li>
+    <li>Un error cada vez, y dejar una prueba que lo vigile.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="pruebas">Anterior</button><button class="btn primary" data-go="integrador">Siguiente: ejemplo integrador</button></div>
+</section>
+
+<!-- 2.10 -->
+
+<!-- ================= p-integrador ================= -->
+<section class="pane" id="p-integrador">
+  <span class="tag">Apartado 2.10</span>
+  <h2>Ejemplo integrador</h2>
+  <p class="lead">Un programa completo que usa todo lo del tema: un juego de adivinar un número.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Hasta ahora has practicado cada técnica por separado, como aprender a freír, hervir y cortar. Aquí cocinas un plato entero usando todas. Si entiendes por qué cada estructura está donde está, ya dominas el tema.</p></div>
+
+  <h3>El enunciado</h3>
+  <ul>
+    <li>El programa elige un número aleatorio entre 1 y 100.</li>
+    <li>El usuario tiene <b>7 intentos</b>.</li>
+    <li>Tras cada intento, el programa dice si el secreto es mayor o menor.</li>
+    <li>Si la entrada no es un número, se avisa y <b>no se descuenta el intento</b>.</li>
+    <li>Al terminar, pregunta si quieres otra partida.</li>
+  </ul>
+
+  <h3>Qué estructura va en cada sitio</h3>
+  <div class="tw"><table class="t"><thead><tr><th>Parte del problema</th><th>Estructura</th></tr></thead><tbody>
+    <tr><td>Elegir el número y mostrar mensajes</td><td>Secuencial</td></tr>
+    <tr><td>Repetir partidas (al menos una)</td><td>Bucle <code>do-while</code></td></tr>
+    <tr><td>Pedir intentos mientras queden y no se haya acertado</td><td>Bucle <code>while</code> con contador y conmutador</td></tr>
+    <tr><td>Decir mayor, menor o acierto</td><td>Condicional múltiple (<code>if-else if-else</code>)</td></tr>
+    <tr><td>Controlar entradas que no son números</td><td><code>try-catch</code></td></tr>
+  </tbody></table></div>
+  <p>No hace falta ningún <code>break</code>: el bucle de intentos termina solo por su condición, gracias al conmutador <code>acertado</code>. Los apuntes lo recomiendan como buena práctica.</p>
+
+  <h3>Ejecútalo paso a paso</h3>
+  <p>Aquí el número secreto está fijado en 42 para que puedas seguirlo (en el programa real es aleatorio). Elige un escenario y avanza. Fíjate en cuándo sube <code>intentos</code> y cuándo no.</p>
+  <div class="tracer" data-tracer="integrador"></div>
+
+  <details><summary>Ver el programa completo</summary>
+<pre class="code" data-hl>import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ * Juego de adivinar un número entre 1 y 100 en un número limitado de intentos.
+ *
+ * @author Alumnado de 1º DAM
+ * @version 1.0
+ */
+public class AdivinaNumero {
+
+    public static void main(String[] args) {
+        // Declaraciones
+        final int MAX_INTENTOS = 7;
+        Scanner teclado = new Scanner(System.in);
+        String respuesta;
+
+        // Acciones
+        do {                                            // Una partida por vuelta
+            int secreto = (int) (Math.random() * 100) + 1;
+            int intentos = 0;                           // Contador
+            boolean acertado = false;                   // Conmutador
+
+            System.out.println("He pensado un número entre 1 y 100. Tienes " + MAX_INTENTOS + " intentos.");
+
+            while (!acertado &amp;&amp; intentos &lt; MAX_INTENTOS) {
+                System.out.print("Intento " + (intentos + 1) + ": ");
+                try {
+                    int numero = teclado.nextInt();
+                    intentos++;                         // Solo cuenta si es un número
+
+                    if (numero &lt; secreto) {
+                        System.out.println("El número secreto es MAYOR.");
+                    } else if (numero &gt; secreto) {
+                        System.out.println("El número secreto es MENOR.");
+                    } else {
+                        acertado = true;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Eso no es un número entero. Prueba otra vez.");
+                    teclado.nextLine();                 // Limpia lo que escribió
+                }
+            }
+
+            if (acertado) {
+                System.out.println("¡Enhorabuena! Lo has adivinado en " + intentos + " intentos.");
+            } else {
+                System.out.println("Se acabaron los intentos. El número era " + secreto + ".");
+            }
+
+            System.out.print("¿Otra partida? (s/n): ");
+            teclado.nextLine();                         // Limpia el salto de línea pendiente
+            respuesta = teclado.nextLine();
+        } while (respuesta.equalsIgnoreCase("s"));
+
+        System.out.println("¡Hasta la próxima!");
+        teclado.close();
+    }
+}</pre></details>
+
+  <h3>Qué decisiones tiene el código (y por qué)</h3>
+  <ul>
+    <li><b>Estilo (2.6):</b> cabecera, bloques de declaraciones y acciones, Javadoc, comentarios solo donde aportan, constante en mayúsculas (<code>MAX_INTENTOS</code>) en vez de un "número mágico", y sangría que refleja la anidación.</li>
+    <li><b>Lectura:</b> usa <code>nextInt()</code> dentro del <code>try</code>. Si el usuario escribe letras, salta <code>InputMismatchException</code>. Ojo: el texto inválido se queda en el búfer, así que en el <code>catch</code> hay que limpiarlo con <code>teclado.nextLine()</code> o el error se repetiría sin dejar escribir otra vez. (Por la misma razón, tras el último <code>nextInt()</code> hay un <code>nextLine()</code> antes de leer la respuesta s/n.)</li>
+  </ul>
+
+  <h3>Pruebas de caja negra del juego</h3>
+  <div class="tw"><table class="t"><thead><tr><th>Caso</th><th>Entrada</th><th>Resultado esperado</th></tr></thead><tbody>
+    <tr><td>Acierto</td><td>El número secreto</td><td>Enhorabuena con el número de intentos</td></tr>
+    <tr><td>Menor / mayor</td><td>Un número por debajo o por encima</td><td>La pista correspondiente</td></tr>
+    <tr><td>Entrada no válida</td><td><code>hola</code>, <code>3.5</code>, línea vacía</td><td>Aviso; el contador no avanza</td></tr>
+    <tr><td>Agotar intentos</td><td>7 fallos</td><td>Mensaje de fin con el número secreto</td></tr>
+    <tr><td>Valores límite</td><td><code>1</code>, <code>100</code>, <code>0</code>, <code>101</code></td><td>Pistas coherentes (<code>0</code> y <code>101</code> cuentan como intento)</td></tr>
+    <tr><td>Repetir partida</td><td><code>s</code>, <code>S</code>, <code>n</code>, otro</td><td>Nueva partida solo con <code>s</code> o <code>S</code></td></tr>
+  </tbody></table></div>
+  <div class="callout warn"><p><b>Pregunta abierta de los apuntes:</b> <code>0</code> y <code>101</code> cuentan como intento aunque estén fuera del rango. Piensa cómo evitarlo. Pista: ¿dónde se hace <code>intentos++</code> y qué comprobación falta antes?</p></div>
+  <p>Para probar cómodo, puedes fijar el secreto (<code>int secreto = 42;</code>) o mirarlo con el depurador justo después de generarlo.</p>
+
+  <h3>Test</h3>
+  <div class="quiz" data-sec="integrador"></div>
+
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Partidas: <code>do-while</code>. Intentos: <code>while</code> con contador (<code>intentos</code>) y conmutador (<code>acertado</code>).</li>
+    <li>Mayor/menor/acierto: <code>if-else if-else</code>. Entrada inválida: <code>try-catch</code>.</li>
+    <li>El intento solo se cuenta tras un <code>nextInt()</code> correcto.</li>
+    <li>En el <code>catch</code> de <code>InputMismatchException</code>, <code>teclado.nextLine()</code> limpia el texto inválido del búfer.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="depuracion">Anterior</button><button class="btn primary" data-go="examen">Ir al examen de práctica</button></div>
+</section>
+
+<!-- EXAMEN -->
+
+<!-- ================= p-metodos ================= -->
+<section class="pane" id="p-metodos">
+  <span class="tag">Apartado 2.11</span>
+  <h2>Funciones (métodos)</h2>
+  <p class="lead">Un método es un trozo de código con nombre que recibe datos, hace una tarea y puede devolver un resultado. Llevas usando métodos desde el primer día: <code>main</code>, <code>println</code>, <code>Math.sqrt</code>, <code>Math.random</code>… Ahora vas a escribir los tuyos.</p>
+  <div class="eli"><span class="l">En cristiano</span><p>Piensa en una cocina: el pinche pela, el cocinero guisa y el camarero sirve. Cada uno hace <b>una sola tarea</b> y a los demás les basta saber qué les entrega, no cómo lo hace. Un método es eso: una máquina con una entrada, una tarea y una salida. Divide y vencerás: un problema grande se rompe en problemas pequeños.</p></div>
+
+  <h3>Por qué existen los métodos</h3>
+  <p>Repetir código es cómodo hoy y una fuente de errores mañana. Si el mismo bucle que dibuja una línea de asteriscos aparece tres veces, cualquier cambio hay que hacerlo tres veces. Con un método se escribe <b>una vez</b> y se llama las veces que haga falta.</p>
+  <div class="grid">
+    <div class="card"><b>Cohesión alta</b><p>Cada método hace <b>una sola tarea</b>. <code>calcularMedia</code> calcula la media: no la pide por teclado ni la imprime.</p></div>
+    <div class="card"><b>Acoplamiento bajo</b><p>Un método depende lo mínimo de los demás. Si uno falla, el error no se propaga por todo el programa.</p></div>
+    <div class="card"><b>Interfaz sencilla</b><p>Para usarlo basta saber qué <b>recibe</b> y qué <b>devuelve</b>, no cómo lo hace por dentro.</p></div>
+  </div>
+
+  <h3>Anatomía de un método</h3>
+<pre class="code" data-hl>public static double media(int a, int b) {
+    double suma = a + b;
+    return suma / 2;
+}</pre>
+  <p>La primera línea es la <b>cabecera</b>: modificadores (<code>public static</code>), <b>tipo que devuelve</b> (<code>double</code>), <b>nombre</b> (<code>media</code>) y <b>parámetros</b> entre paréntesis (<code>int a, int b</code>). Lo que va entre llaves es el <b>cuerpo</b>. Se escribe <b>dentro de la clase y fuera de <code>main</code></b> (ni dentro de otro método). Se usa llamándolo por su nombre: <code>double m = media(4, 7);</code>.</p>
+
+  <h3>¿Y ese <code>static</code>?</h3>
+  <p>De momento <b>ponlo siempre delante</b> de tus métodos, igual que en <code>public static void main</code>. Todavía no sabemos qué significa (se explica cuando lleguemos a la programación orientada a objetos); por ahora basta con saber que <b>sin él, el método no se puede llamar desde <code>main</code></b>.</p>
+
+  <h3>¿Lo muestra o lo devuelve?</h3>
+  <p>Si el método no devuelve nada, su tipo es <code>void</code>. Si devuelve algo, se indica el tipo y se usa <code>return</code>. <b>Mostrar un resultado no es devolverlo</b>: lo que se imprime ya no se puede usar en un cálculo.</p>
+<pre class="code" data-hl>public static void cuadradoV(int n) {      // muestra
+    System.out.println(n * n);
+}
+public static int cuadrado(int n) {        // devuelve
+    return n * n;
+}
+// cuadrado(3) + 1  -> 10      cuadradoV(3) + 1  -> no compila</pre>
+  <p><code>return</code> devuelve el valor <b>y sale del método</b>: lo que haya debajo no se ejecuta. Por eso un método con varios <code>return</code> funciona como una cadena de decisiones:</p>
+<pre class="code" data-hl>public static String calificar(double nota) {
+    if (nota < 0 || nota > 10) { return "No válida"; }
+    if (nota < 5)              { return "Suspenso"; }
+    if (nota < 7)              { return "Aprobado"; }
+    if (nota < 9)              { return "Notable"; }
+    return "Sobresaliente";
+}
+// calificar(6) devuelve "Aprobado": el resto no llega a ejecutarse</pre>
+
+  <h3>Parámetros: formales, actuales y por valor</h3>
+  <p>En la cabecera están los <b>parámetros formales</b>; en la llamada, los <b>parámetros actuales</b> (o argumentos). Se asignan <b>por orden</b>: el primer argumento al primer parámetro, y así. Tienen que coincidir en <b>número</b> y en <b>tipo compatible</b>.</p>
+  <div class="grid">
+    <div class="card"><b>Encaja</b><p><code>public static double raiz(double x)</code> con <code>raiz(27)</code>: un <code>int</code> cabe en un <code>double</code>. Java convierte solo hacia tipos «más grandes».</p></div>
+    <div class="card"><b>No encaja</b><p><code>public static int cuadrado(int n)</code> con <code>cuadrado(2.5)</code> o <code>cuadrado("4")</code> no compila. Con <code>cuadrado((int) 2.5)</code> sí (casting explícito).</p></div>
+  </div>
+  <p>En Java los argumentos se pasan <b>siempre por valor</b>: el método recibe una <b>copia</b>. Lo que hagas con el parámetro dentro no cambia la variable de fuera:</p>
+<pre class="code" data-hl>public static void incrementar(int n) {
+    n++;                          // cambia solo la copia
+}
+public static void main(String[] args) {
+    int x = 5;
+    incrementar(x);
+    System.out.println(x);        // sigue siendo 5
+}</pre>
+
+  <h3>Variables locales y la pila de llamadas</h3>
+  <p>Una variable solo existe dentro del bloque <code>{ }</code> en el que se declara. Cada método tiene <b>sus propias variables</b>: la <code>r</code> de <code>main</code> y la <code>r</code> de <code>doble</code> son distintas. Cuando un método llama a otro, el primero <b>espera</b>: <code>main</code> llama a <code>conIva</code>, que llama a <code>calcularIva</code>; este termina primero y devuelve el valor, luego termina <code>conIva</code> y por último sigue <code>main</code>.</p>
+
+  <h3>Sobrecarga: mismo nombre, distintos parámetros</h3>
+  <p>Puede haber varios métodos con el mismo nombre si cambian sus parámetros; Java elige uno según el número y el <b>tipo</b> del argumento. Es lo que hace <code>Math.abs</code> (hay uno para <code>int</code>, otro para <code>long</code>, <code>float</code> y <code>double</code>). Un método sobrecargado puede reutilizar otro:</p>
+<pre class="code" data-hl>public static int mayor(int a, int b) {
+    if (a > b) { return a; }
+    return b;
+}
+public static int mayor(int a, int b, int c) {
+    return mayor(mayor(a, b), c);   // reutiliza el de dos
+}</pre>
+
+  <h3>Dentro de un método cabe todo lo que sabes</h3>
+  <p>Condiciones, bucles, varios <code>return</code>… Por ejemplo, saber si un número es primo:</p>
+<pre class="code" data-hl>public static boolean esPrimo(int n) {
+    if (n < 2) { return false; }
+    for (int d = 2; d * d <= n; d++) {
+        if (n % d == 0) { return false; }
+    }
+    return true;
+}</pre>
+  <p>Parar en <code>d * d &lt;= n</code> ahorra muchísimas vueltas: para n = 1 000 003 son unas 1 000 en vez de un millón. Y el <code>return false</code> sale en cuanto aparece un divisor.</p>
+
+  <h3>Buenos nombres y documentación</h3>
+  <p>Un método se nombra con un <b>verbo</b> en <code>lowerCamelCase</code> que diga qué hace, hace una sola tarea y tiene pocos parámetros (muchos parámetros dan pie a errores).</p>
+  <table class="keys"><tr><td><code>calcularMedia()</code>, <code>esPrimo()</code>, <code>mostrarTabla()</code></td><td>✔ Bien: verbo, <code>lowerCamelCase</code>, una tarea</td></tr><tr><td><code>CalcularMedia()</code>, <code>calcular_media()</code></td><td>✘ Mal: no sigue <code>lowerCamelCase</code></td></tr><tr><td><code>cm()</code></td><td>✘ Mal: no dice qué hace</td></tr><tr><td><code>pedirYCalcularEImprimir()</code></td><td>✘ Mal: hace tres tareas</td></tr></table>
+  <p>El comentario Javadoc <code>/** */</code> va justo antes de la cabecera, con <code>@param</code> por cada parámetro y <code>@return</code> si devuelve algo:</p>
+<pre class="code" data-hl>/**
+ * Suma todos los números naturales entre n y m, ambos incluidos.
+ *
+ * @param n número inicial de la secuencia
+ * @param m número final de la secuencia
+ * @return la suma, o -1 si n > m
+ */
+public static int sumarNumeros(int n, int m) { ... }</pre>
+
+  <h3>Refactorizar: de código repetido a un método</h3>
+  <ol>
+    <li><b>Detecta</b> el bloque que se repite.</li>
+    <li><b>¿Qué cambia</b> entre una copia y otra? Serán los parámetros.</li>
+    <li><b>¿Qué sale?</b> Será el valor que devuelve.</li>
+    <li><b>Escríbelo</b> como método, con un buen nombre.</li>
+    <li><b>Llámalo</b> en lugar de cada copia.</li>
+  </ol>
+  <p><b>Regla de oro:</b> si copias y pegas un bloque, probablemente querías un método.</p>
+
+  <h3>Errores típicos: ¿compila o no?</h3>
+  <details class="basics"><summary><code>public static int doble(int n) { int r = n * 2; }</code></summary><p>No compila: promete devolver un <code>int</code> pero no hay <code>return</code>.</p></details>
+  <details class="basics"><summary><code>public static int signo(int n) { if (n &gt;= 0) return 1; }</code></summary><p>No compila: si <code>n</code> es negativo, el método termina sin devolver nada. Todos los caminos deben tener <code>return</code>.</p></details>
+  <details class="basics"><summary><code>public static int mitad(int n) { return n / 2.0; }</code></summary><p>No compila: <code>n / 2.0</code> es <code>double</code> y el método devuelve <code>int</code> (pérdida de precisión).</p></details>
+  <details class="basics"><summary><code>public static void hola() { return; System.out.println("hola"); }</code></summary><p>No compila: la línea tras el <code>return</code> es código inalcanzable.</p></details>
+  <details class="basics"><summary><code>public static double media(int a, int b) { return (a + b) / 2; }</code></summary><p>Compila, pero es un error lógico: <code>(a + b) / 2</code> es una división entera y pierde los decimales. Usa <code>2.0</code>.</p></details>
+
+  <h3>Predice la salida</h3>
+  <p>Lee el código, imagina qué pasa en la pantalla y escribe la salida (varias líneas separadas por espacios).</p>
+  <div class="preds" data-sec="metodos"></div>
+
+  <details><summary>Chuleta para el examen</summary><ul>
+    <li>Método = código con nombre: cabecera (<code>public static tipo nombre(parámetros)</code>) + cuerpo. Dentro de la clase, fuera de <code>main</code>.</li>
+    <li>Una tarea por método (cohesión alta). Nombre: verbo en <code>lowerCamelCase</code>.</li>
+    <li><code>void</code> no devuelve nada; con otro tipo, <code>return valor</code>. Mostrar ≠ devolver. <code>return</code> sale del método.</li>
+    <li>Argumentos por <b>orden</b>, mismo <b>número</b> y tipos compatibles. Siempre <b>por valor</b> (una copia).</li>
+    <li>Las variables locales viven solo en su bloque.</li>
+    <li>Sobrecarga: mismo nombre, distintos parámetros.</li>
+    <li>Si repites un bloque, hazlo método. Javadoc con <code>@param</code> y <code>@return</code>.</li>
+  </ul></details>
+  <div class="nextrow"><button class="btn" data-go="integrador">Anterior: integrador</button><span></span></div>
+</section>
+
+
+<!-- ================= p-examen ================= -->
+<section class="pane" id="p-examen">
+  <span class="tag">Exámenes</span><h2>Examen de práctica</h2>
+  <p class="lead">Diez preguntas al azar. Elige todo el tema o solo un apartado para repasar donde más fallas. Pulsa "Nuevo examen" para otra tanda.</p>
+  <div class="row"><label>Preguntas de <select id="exam-sec"><option value="todo">Todo el tema 2</option><option value="estructurada">2.1 Estructurada</option><option value="secuencial">2.2 Secuencial</option><option value="selectiva">2.3 Selectiva</option><option value="bucles">2.4 Bucles</option><option value="saltos">2.5 Saltos</option><option value="estilo">2.6 Estilo</option><option value="excepciones">2.7 Excepciones</option><option value="pruebas">2.8 Pruebas</option><option value="depuracion">2.9 Depuración</option><option value="integrador">2.10 Integrador</option></select></label><button class="btn primary" id="new-exam">Nuevo examen</button></div>
+  <div id="exam"></div>
+  <div class="score" id="exam-score" aria-live="polite"></div>
+</section>
+
+
+<!-- ================= p-cexamen ================= -->
+<section class="pane" id="p-cexamen">
+  <h2>Examen de código</h2>
+  <p class="lead">Tres problemas al azar, sin pistas y con cronómetro. Prueba tu código con Ejecutar y, cuando estés listo, pulsa Entregar: se corrige con varias pruebas y te enseño las soluciones.</p>
+  <div class="row"><button class="btn primary" id="new-cexam">Nuevo examen de código</button></div>
+  <div id="cexam"></div>
+</section>
+
+</main>
+<footer class="fbar"><button class="fb-menu" id="fb-menu" type="button" aria-label="Menú de pasos">☰</button><div class="fb-info"><b><span id="fb-title"></span><span class="done-badge" id="fb-done">HECHO</span></b><small id="fb-sub"></small></div><button class="btn" id="fb-back" type="button">Atrás</button><button class="btn primary" id="fb-next" type="button">Siguiente</button></footer>
+
+<script src="js/motor/interprete-java.js"></script>
+<script src="js/motor/autocompletado.js"></script>
+<script src="js/motor/laboratorio.js"></script>
+<script src="js/motor/explicaciones.js"></script>
+<script src="js/motor/reproductor.js"></script>
+<script src="datos/tema2/ejercicios.js"></script>
+<script src="datos/tema2/ejercicios-corrige.js"></script>
+<script src="datos/tema2/ejercicios-metodos.js"></script>
+<script src="datos/tema2/ejercicios-profe.js"></script>
+<script src="js/tema2/utilidades.js"></script>
+<script src="datos/tema2/preguntas.js"></script>
+<script src="datos/tema2/predicciones.js"></script>
+<script src="js/tema2/renderizado-tests.js"></script>
+<script src="js/tema2/traza-paso-a-paso.js"></script>
+<script src="js/tema2/simulador-else-if.js"></script>
+<script src="js/tema2/simulador-switch.js"></script>
+<script src="datos/tema2/preguntas-2-6-a-2-10.js"></script>
+<script src="datos/tema2/predicciones-2-7-a-2-9.js"></script>
+<script src="js/tema2/traza-depuracion.js"></script>
+<script src="js/tema2/traza-juego.js"></script>
+<script src="js/tema2/clasificador-identificadores.js"></script>
+<script src="js/tema2/simulador-try-catch.js"></script>
+<script src="js/tema2/simulador-clases-equivalencia.js"></script>
+<script src="js/tema2/simulador-assert.js"></script>
+<script src="js/tema2/navegacion.js"></script>
+</body>
+</html>
